@@ -492,7 +492,7 @@ class _SidebarNavItem extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected
                 ? context.primaryContainerColor
-                : Colors.transparent,
+                : context.surfaceColor,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
