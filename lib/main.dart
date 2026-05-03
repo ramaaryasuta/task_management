@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
+import 'features/calendar/presentations/bloc/calendar_bloc.dart';
 import 'utils/printlog.dart';
 
 void main() {
@@ -15,7 +17,12 @@ void main() {
       usePathUrlStrategy();
       WidgetsFlutterBinding.ensureInitialized();
 
-      runApp(const MyApp());
+      runApp(
+        MultiBlocProvider(
+          providers: [BlocProvider(create: (_) => CalendarBloc())],
+          child: const MyApp(),
+        ),
+      );
     },
     (e, s) {
       printLog('[runZonedGuarded] error: $e, stackTrace: $s');

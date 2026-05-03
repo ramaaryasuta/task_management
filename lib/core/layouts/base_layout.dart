@@ -440,8 +440,8 @@ class _SidebarHeader extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
-          Icon(Icons.unfold_more, size: 16, color: context.tertiaryColor),
+          // const Spacer(),
+          // Icon(Icons.unfold_more, size: 16, color: context.tertiaryColor),
         ],
       ),
     );

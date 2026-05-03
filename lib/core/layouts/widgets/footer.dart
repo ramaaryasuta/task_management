@@ -32,7 +32,7 @@ class SidebarFooter extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Personal plan',
+                  'Personal',
                   style: TextStyle(fontSize: 10, color: context.outlineColor),
                 ),
               ],
