@@ -4,6 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/extensions/color_theme_extension.dart';
 import '../../../../core/extensions/text_theme_extension.dart';
+import '../../../../utils/utils.dart';
+import '../../domain/entities/calender_event.dart';
 import '../bloc/calendar_bloc.dart';
 import '../bloc/calendar_event.dart';
 import '../bloc/calendar_state.dart';
@@ -55,6 +57,33 @@ class CalendarTabelView extends StatelessWidget {
                 SelectDateEvent(selectedDate, focusDate),
               );
             },
+
+            eventLoader: (day) {
+              final key = DateTime(day.year, day.month, day.day);
+              return state.events[key] ?? [];
+            },
+
+            calendarBuilders: CalendarBuilders(
+              markerBuilder: (context, day, events) {
+                if (events.isEmpty) return const SizedBox.shrink();
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: events.take(3).map((e) {
+                    final event = e as CalenderEvent;
+                    return Container(
+                      width: 5,
+                      height: 5,
+                      margin: const EdgeInsets.symmetric(horizontal: 1),
+                      decoration: BoxDecoration(
+                        color: hexColor(event.colorCode),
+                        shape: BoxShape.circle,
+                      ),
+                    );
+                  }).toList(),
+                );
+              },
+            ),
           ),
         );
       },
