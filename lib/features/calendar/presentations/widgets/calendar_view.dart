@@ -18,6 +18,9 @@ class CalendarTabelView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: TableCalendar(
+            pageAnimationEnabled: false,
+            pageJumpingEnabled: false,
+            availableGestures: AvailableGestures.none,
             headerVisible: false,
             currentDay: DateTime.now(),
             startingDayOfWeek: StartingDayOfWeek.sunday,
