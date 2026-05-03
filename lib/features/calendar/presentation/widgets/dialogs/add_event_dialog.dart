@@ -7,7 +7,6 @@ import '../../../../../components/base_dialog.dart';
 import '../../../../../components/button.dart';
 import '../../../../../components/color_picker.dart';
 import '../../../../../components/text_field.dart';
-import '../../../../../utils/printlog.dart';
 import '../../../domain/entities/calender_event.dart';
 import '../../bloc/calendar_bloc.dart';
 import '../../bloc/calendar_event.dart';
@@ -68,7 +67,6 @@ class _AddEventFormState extends State<AddEventForm> {
             return MElevatedButton(
               label: 'Save Event',
               onPressed: () {
-                printLog(_hexColor);
                 context.read<CalendarBloc>().add(
                   AddCalenderEventEvent(
                     date: state,
