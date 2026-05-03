@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../../features/calendar/presentations/pages/calendar_page.dart';
-import '../../features/dashboard/presentations/page/dashboard_page.dart';
+import '../../features/calendar/presentation/pages/calendar_page.dart';
+import '../../features/dashboard/presentation/page/dashboard_page.dart';
 import '../layouts/base_layout.dart';
 import '../layouts/not_found_page.dart';
 import 'app_routes.dart';
