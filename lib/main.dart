@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,13 +10,18 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'core/routing/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/calendar/presentation/bloc/calendar_bloc.dart';
+import 'firebase_options.dart';
 import 'utils/printlog.dart';
 
 void main() {
   runZonedGuarded(
-    () {
+    () async {
       usePathUrlStrategy();
       WidgetsFlutterBinding.ensureInitialized();
+
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
       runApp(
         MultiBlocProvider(
