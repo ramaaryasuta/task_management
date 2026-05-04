@@ -94,7 +94,7 @@ class _MColorPickerState extends State<MColorPicker> {
 
   // ── Convert Color → '#RRGGBB' hex string
   String _toHexString(Color color) {
-    return '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+    return '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
   }
 
   void _onColorChanged(Color color) {
@@ -117,7 +117,7 @@ class _MColorPickerState extends State<MColorPicker> {
             style: theme.textTheme.labelMedium?.copyWith(
               fontWeight: FontWeight.w500,
               fontSize: 13,
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 8),
@@ -187,10 +187,12 @@ class _ColorPreviewTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.4),
+          color: theme.colorScheme.surfaceContainerHighest.withValues(
+            alpha: 0.4,
+          ),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: theme.colorScheme.outline.withOpacity(0.35),
+            color: theme.colorScheme.outline.withValues(alpha: 0.35),
             width: 0.5,
           ),
         ),
@@ -205,12 +207,12 @@ class _ColorPreviewTile extends StatelessWidget {
                 color: color,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: theme.colorScheme.outline.withOpacity(0.2),
+                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
                   width: 1,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.4),
+                    color: color.withValues(alpha: 0.4),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
@@ -235,7 +237,7 @@ class _ColorPreviewTile extends StatelessWidget {
             Icon(
               Icons.colorize_outlined,
               size: 16,
-              color: theme.colorScheme.onSurface.withOpacity(0.4),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
             ),
           ],
         ),
@@ -317,7 +319,7 @@ class _ColorPickerDialogState extends State<_ColorPickerDialog> {
                     color: _currentColor,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: theme.colorScheme.outline.withOpacity(0.2),
+                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
                     ),
                   ),
                 ),
@@ -405,7 +407,7 @@ class _ColorPickerDialogState extends State<_ColorPickerDialog> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       side: BorderSide(
-                        color: theme.colorScheme.outline.withOpacity(0.4),
+                        color: theme.colorScheme.outline.withValues(alpha: 0.4),
                       ),
                     ),
                     child: Text(
@@ -413,7 +415,9 @@ class _ColorPickerDialogState extends State<_ColorPickerDialog> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: theme.colorScheme.onSurface.withOpacity(0.7),
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.7,
+                        ),
                       ),
                     ),
                   ),
@@ -527,7 +531,7 @@ class _MColorPickerFieldState extends State<MColorPickerField> {
   }
 
   String _toHexString(Color color) =>
-      '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+      '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
 
   @override
   Widget build(BuildContext context) {
@@ -544,7 +548,7 @@ class _MColorPickerFieldState extends State<MColorPickerField> {
             style: theme.textTheme.labelMedium?.copyWith(
               fontWeight: FontWeight.w500,
               fontSize: 13,
-              color: theme.colorScheme.onSurface.withOpacity(0.7),
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           const SizedBox(height: 10),
@@ -617,4 +621,4 @@ Color hexToColor(String hex, {Color fallback = const Color(0xFF534AB7)}) {
 /// Converts a Flutter [Color] to a '#RRGGBB' hex string.
 /// Alpha channel is ignored.
 String colorToHex(Color color) =>
-    '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+    '#${color.toARGB32().toRadixString(16).substring(2).toUpperCase()}';
