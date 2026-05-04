@@ -435,7 +435,7 @@ class _SidebarHeader extends StatelessWidget {
               Text(
                 'Personal workspace',
                 style: context.labelSmallTextStyle!.copyWith(
-                  color: context.tertiaryColor,
+                  color: context.onPrimaryContainerColor,
                 ),
               ),
             ],
@@ -460,7 +460,7 @@ class _SectionLabel extends StatelessWidget {
         label.toUpperCase(),
         style: context.labelSmallTextStyle!.copyWith(
           fontWeight: FontWeight.w500,
-          color: context.tertiaryColor,
+          color: context.onPrimaryContainerColor,
           letterSpacing: 0.8,
         ),
       ),
