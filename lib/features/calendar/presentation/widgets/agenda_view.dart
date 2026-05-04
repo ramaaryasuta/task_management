@@ -31,7 +31,7 @@ class AgendaView extends StatelessWidget {
             crossAxisAlignment: .start,
             children: [
               Text(
-                DateTimeHelper.formatToDayMonth(state.focusedDay),
+                DateTimeHelper.formatToDayMonth(state.selectedDay),
                 style: context.bodyMediumTextStyle!.copyWith(
                   fontWeight: FontWeight.bold,
                 ),

@@ -30,7 +30,7 @@ class CalendarTabelView extends StatelessWidget {
             lastDay: DateTime.utc(2030, 3, 14),
             focusedDay: state.focusedDay,
             selectedDayPredicate: (day) {
-              return isSameDay(state.focusedDay, day);
+              return isSameDay(state.selectedDay, day);
             },
             calendarStyle: CalendarStyle(
               outsideDaysVisible: true,
