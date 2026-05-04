@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../components/app_logo.dart';
 import '../extensions/color_theme_extension.dart';
 import '../extensions/text_theme_extension.dart';
 import '../routing/app_routes.dart';
@@ -29,6 +30,7 @@ final List<NavItem> kNavItems = [
     icon: Icons.calendar_month_outlined,
     iconSelected: Icons.calendar_month,
     badgeCount: 6,
+    badgeTooltip: 'Agenda Today',
   ),
   // const NavItem(
   //   label: 'Kanban',
@@ -327,7 +329,7 @@ class _MobileLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: MobileAppBar(title: kNavItems[selectedIndex].label),
+      appBar: const MobileAppBar(),
       body: child,
       bottomNavigationBar: _AppBottomNavBar(
         selectedIndex: selectedIndex,
@@ -402,26 +404,10 @@ class _SidebarHeader extends StatelessWidget {
         ),
       ),
       child: Row(
+        spacing: 8,
         children: [
           // Logo mark
-          Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              color: context.primaryColor,
-              borderRadius: BorderRadius.circular(7),
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              'V',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          const SizedBox(width: 9),
+          const AppLogo(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -518,7 +504,14 @@ class _SidebarNavItem extends StatelessWidget {
                   ),
                 ),
               ),
-              if (item.badgeCount != null) MBadge(count: item.badgeCount!),
+              if (item.badgeCount != null)
+                Tooltip(
+                  message: item.badgeTooltip ?? '',
+                  textStyle: context.labelSmallTextStyle!.copyWith(
+                    color: context.surfaceColor,
+                  ),
+                  child: MBadge(count: item.badgeCount!),
+                ),
             ],
           ),
         ),

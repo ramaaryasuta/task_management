@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../extensions/text_theme_extension.dart';
-
-const kPrimary = Color(0xFF534AB7);
-const kPrimaryLight = Color(0xFFEEEDFE);
-const kPrimaryDark = Color(0xFF3C3489);
-const kSurface = Color(0xFFF8F7FC);
-const kBorder = Color(0xFFE8E6F0);
-const kTextPrimary = Color(0xFF1A1825);
-const kTextSecondary = Color(0xFF6E6A85);
-const kTextTertiary = Color(0xFFADABBF);
+import '../../../components/app_logo.dart';
+import '../../extensions/color_theme_extension.dart';
 
 class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
-
-  const MobileAppBar({super.key, required this.title});
+  const MobileAppBar({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(56);
@@ -24,24 +14,18 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.transparent,
-      elevation: 0,
+      elevation: 1,
       scrolledUnderElevation: 1,
-      shadowColor: kBorder,
+      shadowColor: context.outlineColor,
       titleSpacing: 16,
-      title: Text(
-        title,
-        style: context.bodySmallTextStyle!.copyWith(
-          fontWeight: FontWeight.w500,
-          color: kTextPrimary,
-        ),
-      ),
+      title: const AppLogo(),
       actions: [
         IconButton(
-          icon: const Icon(Icons.search, color: kTextSecondary),
+          icon: Icon(Icons.search, color: context.primaryColor),
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.add, color: kPrimary),
+          icon: Icon(Icons.add, color: context.primaryColor),
           onPressed: () {},
         ),
         const SizedBox(width: 4),
