@@ -1,18 +1,20 @@
 import 'package:equatable/equatable.dart';
 
 class CalenderEvent extends Equatable {
-  final int id;
+  final int? id;
   final String title;
   final String description;
   final String colorCode;
+  final DateTime dateEvent;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   const CalenderEvent({
-    required this.id,
+    this.id,
     required this.title,
     required this.description,
     required this.colorCode,
+    required this.dateEvent,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -23,6 +25,7 @@ class CalenderEvent extends Equatable {
     title,
     description,
     colorCode,
+    dateEvent,
     createdAt,
     updatedAt,
   ];
@@ -32,6 +35,7 @@ class CalenderEvent extends Equatable {
     String? title,
     String? description,
     String? colorCode,
+    DateTime? dateEvent,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -40,6 +44,7 @@ class CalenderEvent extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       colorCode: colorCode ?? this.colorCode,
+      dateEvent: dateEvent ?? this.dateEvent,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
