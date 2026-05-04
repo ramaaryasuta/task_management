@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,12 @@ class AgendaView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (context, state) {
+        final normalizeSelectedDate = DateTimeHelper.normalizeDate(
+          state.selectedDay,
+        );
+
+        final events = state.events[normalizeSelectedDate] ?? [];
+
         return Container(
           constraints: BoxConstraints(minHeight: screenHeight(context) - 60),
           padding: const EdgeInsets.all(16),
@@ -39,22 +46,31 @@ class AgendaView extends StatelessWidget {
 
               Builder(
                 builder: (context) {
-                  if (state.events.isEmpty) {
-                    return Center(
-                      child: Text(
-                        'No events',
-                        style: context.bodyMediumTextStyle!.copyWith(
-                          fontWeight: FontWeight.bold,
+                  if (events.isEmpty) {
+                    return SizedBox(
+                      height: screenHeight(context) / 3,
+                      child: Center(
+                        child: Column(
+                          spacing: 10,
+                          mainAxisAlignment: .end,
+                          children: [
+                            Icon(
+                              Icons.event_note_outlined,
+                              color: context.primaryColor,
+                            ),
+                            Text(
+                              'No events',
+                              style: context.bodyMediumTextStyle!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
                   }
 
                   /// if there is events on selected day, show them
-
-                  final normalizeSelectedDate = DateTimeHelper.normalizeDate(
-                    state.selectedDay,
-                  );
 
                   return ListView.builder(
                     shrinkWrap: true,
@@ -73,11 +89,39 @@ class AgendaView extends StatelessWidget {
                 },
               ),
 
-              Center(
-                child: MElevatedButton(
-                  label: 'Add Event',
-                  onPressed: () => openAddEventDialog(context),
-                ),
+              Builder(
+                builder: (context) {
+                  if (events.isEmpty) {
+                    return Center(
+                      child: MElevatedButton(
+                        label: 'Add Event',
+                        onPressed: () => openAddEventDialog(context),
+                      ),
+                    );
+                  }
+
+                  return InkWell(
+                    onTap: () => openAddEventDialog(context),
+                    child: DottedBorder(
+                      options: RectDottedBorderOptions(
+                        padding: const EdgeInsets.all(10),
+                        strokeWidth: 1,
+                        color: context.outlineVariantColor,
+                      ),
+                      child: Row(
+                        spacing: 10,
+                        mainAxisAlignment: .center,
+                        children: [
+                          Icon(Icons.add, color: context.primaryColor),
+                          Text(
+                            'Add New Event',
+                            style: context.bodyMediumTextStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
